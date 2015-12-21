@@ -1,79 +1,80 @@
-/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript&plugins=line-highlight+show-language */
-
+/* http://prismjs.com/download.html?themes=prism&languages=markup+css+clike+javascript+bash+coffeescript+ruby+git+java+jsx+sass+scss&plugins=line-numbers */
 /**
  * prism.js default theme for JavaScript, CSS and HTML
  * Based on dabblet (http://dabblet.com)
  * @author Lea Verou
  */
 
-code,
-pre {
-  font-family: $code-font;
-  font-size: 90%;
-  line-height: 1.5;
+code[class*="language-"],
+pre[class*="language-"] {
+  color: black;
+  text-shadow: 0 1px white;
+  font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+  direction: ltr;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
-  word-wrap: normal;
   word-break: normal;
-  tab-size: 2;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
   hyphens: none;
-  color: black;
-  text-shadow: 0 1px white;
-  direction: ltr;
 }
 
-pre::selection,
-code::selection {
-  background: #b3d4fc;
+pre[class*="language-"]::-moz-selection, pre[class*="language-"] ::-moz-selection,
+code[class*="language-"]::-moz-selection, code[class*="language-"] ::-moz-selection {
   text-shadow: none;
+  background: #b3d4fc;
+}
+
+pre[class*="language-"]::selection, pre[class*="language-"] ::selection,
+code[class*="language-"]::selection, code[class*="language-"] ::selection {
+  text-shadow: none;
+  background: #b3d4fc;
 }
 
 @media print {
-  code,
-  pre {
+  code[class*="language-"],
+  pre[class*="language-"] {
     text-shadow: none;
   }
-
 }
 
 /* Code blocks */
-pre {
+pre[class*="language-"] {
   padding: 1em;
-  margin: 2.5rem 0;
+  margin: .5em 0;
   overflow: auto;
 }
 
-:not(pre) > code,
-pre {
-  border: 1px solid rgba(0, 0, 0, .15);
-  background: #fbfaf8;
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: #f5f2f0;
 }
 
 /* Inline code */
-:not(pre) > code {
-  // slack style
-  padding: 1px 3px;
-  font-family: $code-font;
-  font-size: 72%;
-  line-height: 72%;
-  white-space: normal;
-  color: #c25;
-  border: 1px solid #e1e1e8;
+:not(pre) > code[class*="language-"] {
+  padding: .1em;
   border-radius: .3em;
-  background-color: #f7f7f9;
-  text-shadow: 0 1px #fff;
+  white-space: normal;
 }
 
 .token.comment,
 .token.prolog,
 .token.doctype,
 .token.cdata {
-  color: #969896;
+  color: slategray;
 }
 
 .token.punctuation {
-  color: #333;
+  color: #999;
 }
 
 .namespace {
@@ -87,7 +88,7 @@ pre {
 .token.constant,
 .token.symbol,
 .token.deleted {
-  color: #0086b3;
+  color: #905;
 }
 
 .token.selector,
@@ -96,7 +97,7 @@ pre {
 .token.char,
 .token.builtin,
 .token.inserted {
-  color: #183691;
+  color: #690;
 }
 
 .token.operator,
@@ -104,17 +105,18 @@ pre {
 .token.url,
 .language-css .token.string,
 .style .token.string {
-  color: #a71d5d;
+  color: #a67f59;
+  background: hsla(0, 0%, 100%, .5);
 }
 
 .token.atrule,
 .token.attr-value,
 .token.keyword {
-  color: #a71d5d;
+  color: #07a;
 }
 
 .token.function {
-  color: #0086b3;
+  color: #DD4A68;
 }
 
 .token.regex,
@@ -127,7 +129,6 @@ pre {
 .token.bold {
   font-weight: bold;
 }
-
 .token.italic {
   font-style: italic;
 }
@@ -136,67 +137,43 @@ pre {
   cursor: help;
 }
 
-pre[data-line] {
+pre.line-numbers {
   position: relative;
-  padding: 1em 0 1em 3em;
+  padding-left: 3.8em;
+  counter-reset: linenumber;
 }
 
-.line-highlight {
+pre.line-numbers > code {
+  position: relative;
+}
+
+.line-numbers .line-numbers-rows {
   position: absolute;
-  right: 0;
-  left: 0;
-  padding: inherit 0;
-  margin-top: 1em; /* Same as .prism’s padding-top */
-  line-height: inherit;
-  white-space: pre;
   pointer-events: none;
-  background: linear-gradient(left, hsla(24, 20%, 50%, .1) 70%, hsla(24, 20%, 50%, 0));
-}
-
-.line-highlight:before,
-.line-highlight[data-end]:after {
-  position: absolute;
-  top: .4em;
-  left: .6em;
-  min-width: 1em;
-  padding: 0 .5em;
-  font: bold 65%/1.5 sans-serif;
-  content: attr(data-start);
-  text-align: center;
-  vertical-align: .3em;
-  color: hsl(24, 20%, 95%);
-  border-radius: 999px;
-  background-color: hsla(24, 20%, 50%, .4);
-  box-shadow: 0 1px white;
-  text-shadow: none;
-}
-
-.line-highlight[data-end]:after {
-  top: auto;
-  bottom: .4em;
-  content: attr(data-end);
-}
-
-div.prism-show-language {
-  position: relative;
-}
-
-div.prism-show-language > div.prism-show-language-label[data-language] {
-  position: absolute;
   top: 0;
-  right: 0;
-  bottom: auto;
-  left: auto;
-  z-index: 1;
-  display: inline-block;
-  width: auto;
-  height: auto;
-  padding: 0 .5em;
-  font-size: .9em;
-  transform: none;
-  color: black;
-  border-radius: 0 0 0 5px;
-  background-color: #cfcfcf;
-  box-shadow: none;
-  text-shadow: none;
+  font-size: 100%;
+  left: -3.8em;
+  width: 3em; /* works for line-numbers below 1000 lines */
+  letter-spacing: -1px;
+  border-right: 1px solid #999;
+
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
 }
+
+  .line-numbers-rows > span {
+    pointer-events: none;
+    display: block;
+    counter-increment: linenumber;
+  }
+
+    .line-numbers-rows > span:before {
+      content: counter(linenumber);
+      color: #999;
+      display: block;
+      padding-right: 0.8em;
+      text-align: right;
+    }

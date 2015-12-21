@@ -17,7 +17,7 @@ $ ->
   $('#menu-button').click ->
     $('.cover, main, #menu-button, html').toggleClass 'expanded'
 
-  $("#{openButton}, #avatar-link").click (event) ->
+  $("#{openButton}, #avatar-link, .nav-read-my-blog a").click (event) ->
     if Uno.is 'page', 'home'
       event.preventDefault()
       location.hash = if location.hash is '' then '#open' else ''
@@ -27,3 +27,4 @@ $ ->
   if (Uno.is 'device', 'desktop') and (Uno.is 'page', 'home')
     _animate()
     _expand form: 'hide' if !isOpen
+    
